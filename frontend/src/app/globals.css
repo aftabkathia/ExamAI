@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply min-h-screen bg-ink-950 text-sand-50 antialiased;
+  background-image: theme("backgroundImage.mesh"), theme("backgroundImage.grid");
+  background-size: auto, 48px 48px;
+  background-attachment: fixed;
+}
+
+::selection {
+  @apply bg-jade-500/40 text-sand-50;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-jade-500 px-6 py-3 text-sm font-semibold text-ink-950 transition hover:bg-jade-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-jade-400 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-medium text-sand-50 transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-white/10 bg-ink-900/80 px-4 py-3 text-sand-50 placeholder:text-sand-200/35 outline-none transition focus:border-jade-500/50 focus:ring-2 focus:ring-jade-500/20;
+  }
+
+  .panel {
+    @apply rounded-2xl border border-white/10 bg-ink-900/60 backdrop-blur-sm;
+  }
+
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-jade-400;
+  }
+}
