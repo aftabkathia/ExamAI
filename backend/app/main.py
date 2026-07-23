@@ -16,14 +16,21 @@ app = FastAPI(
     version="1.1.0",
 )
 
+_cors_origins = [
+    settings.frontend_url,
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:3001",
+    "http://127.0.0.1:3001",
+]
+# Allow Vercel preview/production URLs when FRONTEND_URL is set
+if settings.frontend_url and settings.frontend_url not in _cors_origins:
+    _cors_origins.append(settings.frontend_url)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        settings.frontend_url,
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:3001",
-    ],
+    allow_origins=[o for o in _cors_origins if o],
+    allow_origin_regex=r"https://.*\.(vercel\.app|hf\.space)",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
